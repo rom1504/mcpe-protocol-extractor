@@ -1,13 +1,13 @@
 var fs = require('fs');
+
 if (process.argv.length != 3) {
-  console.log("Usage : node protocol-extractor.js <pocketMinePath>");
+  console.log("Incorrect usage! Try: node extractor.js <path-to-pocketmine>");
   process.exit(1);
 }
 
 var pocketMinePath = process.argv[2];
 
 generateProtocol(pocketMinePath);
-
 function generateProtocol(pocketMinePath) {
   var nameToId = parseNameToId(pocketMinePath);
   var packets = parsePackets(pocketMinePath);
@@ -36,11 +36,9 @@ function addIds(nameToId, packets) {
   });
 }
 
-
 function writeProtocol(protocol) {
   fs.writeFile("protocol.json", JSON.stringify(protocol, null, 2));
 }
-
 
 function parseNameToId(pocketMinePath) {
   return fs
