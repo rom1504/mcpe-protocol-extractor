@@ -76,8 +76,8 @@ function parsePackets(pocketMinePath) {
           packetName = results[1];
         else if (results = line.match(/\$this->put(.+?)\(\$this->(.+?)\);/))
           fields.push({
-            name: results[1],
-            type: results[2]
+            name: results[2],
+            type: results[1].toLowerCase()
           });
       });
       return {
