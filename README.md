@@ -4,9 +4,9 @@ Extract the protocol from pocket mine
 
 ## Usage
 
-* `git clone https://github.com/PocketMine/PocketMine-MP.git /tmp/pocketmine`
+* `git clone -b mcpe-0.12 https://github.com/PocketMine/PocketMine-MP.git /tmp/pocketmine`
 * `node protocol-extractor /tmp/pocketmine`
-* `cat packets.json`
+* `cat protocol.json`
 
 ## Current result
 
