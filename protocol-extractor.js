@@ -66,24 +66,27 @@ function parsePackets(pocketMinePath) {
       return !(name == "DataPacket.php" || name == "Info.php");
     })
     .map(function (name) {
-      var file = (fs.readFileSync(path + name, 'utf8'));
-      var packetName = "";
-      var fields = [];
-      var lines = file.split("\n");
-      lines.forEach(function (line) {
-        var results;
-        if (results = line.match(/const NETWORK_ID = Info::(.+);/))
-          packetName = results[1];
-        else if (results = line.match(/\$this->put(.+?)\(\$this->(.+?)\);/))
-          fields.push({
-            name: results[2],
-            type: results[1].toLowerCase()
-          });
-      });
-      return {
-        packetName: packetName,
-        fields: fields
-      }
+      return parsePacket(path, name)
     });
 }
 
+function parsePacket(path, name) {
+  var file = fs.readFileSync(path + name, 'utf8');
+  var packetName = "";
+  var fields = [];
+  var lines = file.split("\n");
+  lines.forEach(function (line) {
+    var results;
+    if (results = line.match(/const NETWORK_ID = Info::(.+);/))
+      packetName = results[1];
+    else if (results = line.match(/\$this->put(.+?)\(\$this->(.+?)\);/))
+      fields.push({
+        name: results[2],
+        type: results[1].toLowerCase()
+      });
+  });
+  return {
+    packetName: packetName,
+    fields: fields
+  }
+}
