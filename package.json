@@ -1,0 +1,29 @@
+{
+  "name": "mcpe-protocol-extractor",
+  "version": "0.0.0",
+  "description": "Extract MCPE protocol from PocketMine",
+  "main": "parser.js",
+  "dependencies": {
+    "php-parser": "0.0.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rom1504/mcpe-protocol-extractor.git"
+  },
+  "keywords": [
+    "mcpe",
+    "minecraft",
+    "extractor",
+    "php",
+    "parser"
+  ],
+  "author": "Romain Beaumont <romain.rom1@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rom1504/mcpe-protocol-extractor/issues"
+  }
+}

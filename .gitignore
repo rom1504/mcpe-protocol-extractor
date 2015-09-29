@@ -1,1 +1,3 @@
-*.json
+a.json
+protocol.json
+node_modules
