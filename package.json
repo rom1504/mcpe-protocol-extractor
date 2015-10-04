@@ -4,7 +4,7 @@
   "description": "Extract MCPE protocol from PocketMine",
   "main": "parser.js",
   "dependencies": {
-    "php-parser": "0.0.8"
+    "php-parser": "git://github.com/rom1504/php-parser.git#fix_const"
   },
   "devDependencies": {},
   "scripts": {

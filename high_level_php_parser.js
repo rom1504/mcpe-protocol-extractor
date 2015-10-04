@@ -16,7 +16,8 @@ var kindToParser = {
   "ns": parseNs,
   "foreach": parseForeach,
   "offset": parseOffset,
-  "number": parseNumber
+  "number": parseNumber,
+  "if": parseIf
 };
 
 function parseExpression(expression) {
@@ -102,6 +103,15 @@ function parseNumber(expression) {
   return {
     kind: "number",
     value: expression[1]
+  }
+}
+
+function parseIf(expression) {
+  return {
+    kind: "if",
+    condition: expression[1],
+    then:expression[2] ? parseExpressions(expression[2]) : [],
+    else:expression[3] ? parseExpressions(expression[3]) : []
   }
 }
 
