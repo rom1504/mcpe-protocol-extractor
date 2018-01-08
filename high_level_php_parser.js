@@ -17,7 +17,10 @@ var kindToParser = {
   "foreach": parseForeach,
   "offset": parseOffset,
   "number": parseNumber,
-  "if": parseIf
+  "if": parseIf,
+  "retif": parseRetif,
+  "new": parseNew,
+  "unary": parseUnary
 };
 
 function parseExpression(expression) {
@@ -112,6 +115,31 @@ function parseIf(expression) {
     condition: expression[1],
     then:expression[2] ? parseExpressions(expression[2]) : [],
     else:expression[3] ? parseExpressions(expression[3]) : []
+  }
+}
+
+function parseRetif(expression) {
+  return {
+    kind: "retif",
+    condition:expression[1],
+    then:parseExpression(expression[2]),
+    else:parseExpression(expression[3])
+  }
+}
+
+function parseNew(expression) {
+  return {
+    kind: "new",
+    cl:expression[1],
+    args:parseExpressions(expression[2])
+  }
+}
+
+function parseUnary(expression) {
+  return {
+    kind: "unary",
+    operation: expression[1],
+    expr:parseExpression(expression[2])
   }
 }
 

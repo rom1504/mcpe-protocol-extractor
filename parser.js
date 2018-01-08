@@ -61,7 +61,8 @@ function getPacketName(insideCl) {
 var hlParser = require("./high_level_php_parser.js");
 
 function expressionToField(expression) {
-  if (expression.kind == "call" && expression.func.kind == "prop" && expression.func.field.value.substr(0, 3) == "put" && expression.args.length == 1) {
+  if (expression.kind == "call" && expression.func.kind == "prop" && expression.func.field.value.substr(0, 3) == "put"
+    && expression.args.length == 1) {
     var arg=expression.args[0];
     if (arg.kind == "prop")
       return {
@@ -72,6 +73,10 @@ function expressionToField(expression) {
       return {
         name: "metadata",
         type: "metadata"
+      };
+    if (arg.kind == "var")
+      return {
+        type: expression.func.field.value.substr(3).toLowerCase()
       };
     if (arg.kind == "call" && arg.func.kind == "ns" && (arg.func.namespaces[0] == "count" || arg.func.namespaces[0] =="strlen"))
       return {
@@ -99,7 +104,10 @@ function expressionToField(expression) {
   }
   // excluded expressions
   if(!(expression.kind=="call" && expression.func.kind=="prop" && expression.func.field.value=="reset") &&
-    !(expression.kind=="set" && expression.var.name=="$meta")) console.log(JSON.stringify(expression, null, 1));
+    !(expression.kind=="set" && expression.var.name=="$meta") &&
+      !(expression.kind=="if")
+
+  ) console.log(JSON.stringify(expression, null, 1));
   return null;
 }
 
